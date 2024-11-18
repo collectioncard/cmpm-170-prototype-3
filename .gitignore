@@ -3,7 +3,7 @@
 .android/
 
 .idea/
-.vscode/  # added VS Code ignores
+**/.vscode/
 
 # Godot-specific ignores
 .import/
