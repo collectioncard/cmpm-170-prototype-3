@@ -1,8 +1,9 @@
 # Godot 4+ specific ignores
 .godot/
-/android/
+.android/
 
 .idea/
+.vscode/  # added VS Code ignores
 
 # Godot-specific ignores
 .import/
