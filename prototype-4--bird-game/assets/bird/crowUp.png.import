@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://j0lqnpuebhyb"
-path="res://.godot/imported/crowUp2.png-da23c6c0dd2421692c4d858aee360287.ctex"
+uid="uid://dsmuyav3t8vtl"
+path="res://.godot/imported/crowUp.png-8f4932ee5efc636b57488215e68af01d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/birds1/crowUp2.png"
-dest_files=["res://.godot/imported/crowUp2.png-da23c6c0dd2421692c4d858aee360287.ctex"]
+source_file="res://assets/bird/crowUp.png"
+dest_files=["res://.godot/imported/crowUp.png-8f4932ee5efc636b57488215e68af01d.ctex"]
 
 [params]
 
