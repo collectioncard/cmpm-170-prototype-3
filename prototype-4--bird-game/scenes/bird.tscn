@@ -35,7 +35,7 @@ script = ExtResource("1_8lvdb")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_xxbex")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gjskf")
 animation = &"fly"
 frame_progress = 0.200725
