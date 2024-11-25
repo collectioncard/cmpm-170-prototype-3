@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=4 uid="uid://k45nni0to4uw"]
+[gd_scene load_steps=9 format=4 uid="uid://k45nni0to4uw"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_n3l4d"]
 [ext_resource type="Texture2D" uid="uid://cm78c6ttiobia" path="res://icon.svg" id="2_dc540"]
 [ext_resource type="Texture2D" uid="uid://cdqlwxwwnkd88" path="res://tilemap_packed.png" id="3_j7y75"]
+[ext_resource type="PackedScene" uid="uid://dyveu0mb4hfyq" path="res://scenes/bird.tscn" id="4_gsu2h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rwtrw"]
 resource_name = "terrain"
@@ -219,9 +220,12 @@ tile_map_data = PackedByteArray("AAABAP7/AAACAAcAAAACAP7/AAACAAcAAAACAP3/AAACAAE
 tile_set = SubResource("TileSet_awybj")
 
 [node name="Player" type="CharacterBody2D" parent="."]
+collision_layer = 0
+safe_margin = 0.5
 script = ExtResource("1_n3l4d")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(0.75, 0.75)
 
 [node name="body" type="CollisionShape2D" parent="Player"]
 position = Vector2(0.5, -2)
@@ -230,6 +234,9 @@ shape = SubResource("RectangleShape2D_e6gvg")
 [node name="sprite" type="Sprite2D" parent="Player"]
 modulate = Color(0, 0, 3.243, 1)
 texture = ExtResource("2_dc540")
+
+[node name="bird" parent="Player" instance=ExtResource("4_gsu2h")]
+scale = Vector2(2, 2)
 
 [node name="wall" type="StaticBody2D" parent="."]
 
