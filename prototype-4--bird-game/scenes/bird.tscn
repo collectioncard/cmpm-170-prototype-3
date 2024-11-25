@@ -38,4 +38,4 @@ shape = SubResource("CircleShape2D_xxbex")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gjskf")
 animation = &"fly"
-frame_progress = 0.258707
+frame_progress = 0.200725
