@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuwaiupcvc6uw"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_alemg"]
+
+[sub_resource type="Gradient" id="Gradient_bij7k"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_imxmn"]
+gradient = SubResource("Gradient_bij7k")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrr01"]
+size = Vector2(200.5, 264.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_djhi1"]
+size = Vector2(212.5, 199)
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_alemg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3.11719, 4.14844)
+texture = SubResource("GradientTexture2D_imxmn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xrr01")
+
+[node name="dir_checker" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dir_checker"]
+position = Vector2(0, -26)
+shape = SubResource("RectangleShape2D_djhi1")
+
+[connection signal="body_entered" from="dir_checker" to="." method="_on_dir_checker_body_entered"]
