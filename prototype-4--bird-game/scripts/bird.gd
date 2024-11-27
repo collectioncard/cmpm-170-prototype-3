@@ -61,7 +61,6 @@ func _physics_process(_delta: float) -> void:
 	else:
 		normal_flying()
 
-	#print(velocity)  # HACK
 	move_and_slide()
 
 

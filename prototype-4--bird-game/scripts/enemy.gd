@@ -26,7 +26,7 @@ func shoot() -> void:
 	new_bullet.dir = direction_to_player
 
 func _physics_process(delta: float) -> void:
-	print_debug(position)
+	# print_debug(position)  # HACK
 	timer += delta;
 	if timer >= cooldown:
 		shoot();
@@ -42,6 +42,6 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_dir_checker_body_entered(_body: Node2D) -> void:
-	print_debug("COLLIDE");
+	# print_debug("COLLIDE");  # HACK
 	direction *= -1
 	velocity.x = SPEED * direction;
