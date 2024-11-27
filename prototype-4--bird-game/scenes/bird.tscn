@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dyveu0mb4hfyq"]
+[gd_scene load_steps=9 format=3 uid="uid://dyveu0mb4hfyq"]
 
 [ext_resource type="Script" path="res://scripts/bird.gd" id="1_8lvdb"]
 [ext_resource type="Texture2D" uid="uid://c4lqtqcgfxkst" path="res://assets/bird/crowDown2.png" id="1_agrc0"]
@@ -6,8 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://j0lqnpuebhyb" path="res://assets/bird/crowUp2.png" id="3_nulvi"]
 [ext_resource type="Texture2D" uid="uid://dsmuyav3t8vtl" path="res://assets/bird/crowUp.png" id="4_2en6y"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_vstqn"]
+radius = 18.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_xxbex"]
-radius = 16.0312
+radius = 5.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gjskf"]
 animations = [{
@@ -41,6 +44,11 @@ animations = [{
 collision_layer = 0
 script = ExtResource("1_8lvdb")
 
+[node name="attack_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area"]
+shape = SubResource("CircleShape2D_vstqn")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_xxbex")
 
@@ -48,3 +56,6 @@ shape = SubResource("CircleShape2D_xxbex")
 sprite_frames = SubResource("SpriteFrames_gjskf")
 animation = &"attacking"
 autoplay = "fly"
+
+[connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

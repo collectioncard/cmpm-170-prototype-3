@@ -14,6 +14,7 @@ var attack_dir : int = 0;
 var attacking_cooldown_time = -1
 var attacking_start_time: float = 0.0
 
+
 func attack_flying():
 	anims.play("attacking");
 	var direction = Vector2(attack_dir, 1).normalized()
@@ -25,7 +26,7 @@ func normal_flying():
 	anims.play("fly");
 	var mouse_position = get_global_mouse_position()
 
-	var player_position = get_parent().position + Vector2.UP * 50;  # TODO: Player POS CHANGE
+	var player_position = get_parent().position + Vector2.UP * 50;
 
 
 	var target_position : Vector2  # where the bird is flying toward
@@ -71,3 +72,8 @@ func _input(event):
 			attacking = true
 			attack_dir = sign(get_global_mouse_position().x - global_position.x )
 			attacking_start_time = Time.get_ticks_msec()
+
+
+func _on_attack_area_body_entered(body: Node2D) -> void:
+	if body.name == 'MaskDude':
+		body.destroy()

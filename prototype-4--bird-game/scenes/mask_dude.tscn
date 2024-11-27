@@ -1,13 +1,42 @@
-[gd_scene load_steps=31 format=3 uid="uid://dq1mgc1o3lwfv"]
+[gd_scene load_steps=39 format=3 uid="uid://dq1mgc1o3lwfv"]
 
 [ext_resource type="Texture2D" uid="uid://chf31i4dp68lq" path="res://assets/mask_dude/idle.png" id="1_00byc"]
 [ext_resource type="Script" path="res://scripts/mask_dude.gd" id="1_e4mc5"]
 [ext_resource type="Texture2D" uid="uid://bqq01ivccwdhr" path="res://assets/mask_dude/fall.png" id="2_pjdyc"]
 [ext_resource type="Texture2D" uid="uid://cxpci5xocfprc" path="res://assets/mask_dude/jump.png" id="3_3byh5"]
+[ext_resource type="Texture2D" uid="uid://dxc8idr4yl5ug" path="res://assets/mask_dude/hit.png" id="3_cbgg6"]
 [ext_resource type="Texture2D" uid="uid://cfjunbcj8b4oe" path="res://assets/mask_dude/run.png" id="3_owc05"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rrr84"]
 radius = 59.0085
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2ma4"]
+atlas = ExtResource("3_cbgg6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6ppm"]
+atlas = ExtResource("3_cbgg6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7xiu"]
+atlas = ExtResource("3_cbgg6")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kf3kn"]
+atlas = ExtResource("3_cbgg6")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7dys"]
+atlas = ExtResource("3_cbgg6")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otxp3"]
+atlas = ExtResource("3_cbgg6")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwnws"]
+atlas = ExtResource("3_cbgg6")
+region = Rect2(192, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ndq7l"]
 atlas = ExtResource("1_00byc")
@@ -113,6 +142,32 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_b2ma4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6ppm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7xiu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kf3kn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a7dys")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otxp3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rwnws")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ndq7l")
 }, {
 "duration": 1.0,
@@ -208,5 +263,11 @@ shape = SubResource("CircleShape2D_rrr84")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_b7dvc")
-animation = &"fall"
+animation = &"hit"
 autoplay = "run"
+
+[node name="despawn_timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="despawn_timer" to="." method="_on_despawn_timer_timeout"]

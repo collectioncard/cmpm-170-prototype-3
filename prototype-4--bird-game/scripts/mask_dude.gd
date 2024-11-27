@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name MaskDude extends CharacterBody2D
 
 
 const SPEED = 300.0
@@ -9,8 +9,10 @@ const JUMP_VELOCITY = -700.0
 
 @onready var player: CharacterBody2D = get_node('../Player')
 @onready var animated_sprite: AnimatedSprite2D = get_node('AnimatedSprite2D')
+@onready var despawn_timer: Timer = get_node('despawn_timer')
 @onready var start_position: Vector2 = position
 @onready var wander_to_right := true
+@onready var is_dead := false
 
 
 func _ready() -> void:
@@ -18,6 +20,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		return
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -43,14 +48,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		animated_sprite.play('jump')
 
-	# detect kill by bird
-	for i in range(get_slide_collision_count()):
-		var collision = get_slide_collision(i)
-		print(collision.get_collider().name)  # HACK
-		if collision.get_collider().name == "bird":
-			print("Collision with bird detected.")  # HACK
-			# add logic for what happens when colliding with bird
-
 
 func wander_around():
 	if abs(position.x - start_position.x) >= wander_radius:
@@ -64,3 +61,14 @@ func wander_around():
 
 func approach_player():
 	velocity.x = SPEED * (1 if player.position.x > position.x else -1)
+
+
+func destroy():
+	is_dead = true
+	animated_sprite.play('hit')
+
+	despawn_timer.start()  # start the timer
+
+
+func _on_despawn_timer_timeout() -> void:
+	queue_free()
