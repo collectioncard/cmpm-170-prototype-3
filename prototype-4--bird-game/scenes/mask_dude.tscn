@@ -269,5 +269,12 @@ autoplay = "run"
 [node name="despawn_timer" type="Timer" parent="."]
 wait_time = 2.0
 
+[node name="hitbox" type="Area2D" parent="."]
+collision_mask = 129
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CircleShape2D_rrr84")
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="despawn_timer" to="." method="_on_despawn_timer_timeout"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

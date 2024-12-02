@@ -76,7 +76,8 @@ func _input(event):
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	print_debug(body.name)
-	if body.name == 'MaskDude':
-		body.destroy()
-	if body.name == "Enemy":
-		body.queue_free();
+	if (attacking):
+		if body.has_method("destroy"):
+			body.destroy()
+		if body.has_method("shoot"):
+			body.queue_free();

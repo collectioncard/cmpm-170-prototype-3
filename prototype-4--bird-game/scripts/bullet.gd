@@ -20,4 +20,4 @@ func _on_body_entered(body : Node2D):
 	if body == player:
 		get_tree().reload_current_scene()
 	else:
-		queue_free()
+		call_deferred("queue_free");

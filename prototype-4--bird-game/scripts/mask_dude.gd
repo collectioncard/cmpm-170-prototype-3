@@ -3,7 +3,7 @@ class_name MaskDude extends CharacterBody2D
 
 const SPEED = 300.0
 const APPROACH_DIST = 500
-const JUMP_VELOCITY = -700.0
+const JUMP_VELOCITY = -800.0
 
 @export var wander_radius = 100  # how far to wander
 
@@ -32,11 +32,10 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor() and is_on_wall():
 		velocity.y = JUMP_VELOCITY
 
-	if is_on_floor():
-		if position.distance_to(player.position) <= APPROACH_DIST:
-			approach_player()  # approach player only when close enough
-		else:
-			wander_around()  # just wander around
+	if position.distance_to(player.position) <= APPROACH_DIST:
+		approach_player()  # approach player only when close enough
+	else:
+		wander_around()  # just wander around
 
 	move_and_slide()
 
@@ -70,5 +69,11 @@ func destroy():
 	despawn_timer.start()  # start the timer
 
 
+
 func _on_despawn_timer_timeout() -> void:
 	queue_free()
+
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.name == "Player":
+		get_tree().reload_current_scene()
