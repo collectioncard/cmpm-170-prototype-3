@@ -1,8 +1,12 @@
 extends Area2D
 
-@export var speed : float = 200;
-@export var dir : Vector2 = Vector2.ZERO;
-var lifespan : float = 5;
+@export var speed: float = 200;
+@export var dir: Vector2 = Vector2.ZERO;
+
+var lifespan: float = 5;
+
+@onready var player = get_parent().get_node("Player")
+
 
 func _process(_delta) -> void:
 	self.position += speed * dir;
@@ -11,5 +15,9 @@ func _process(_delta) -> void:
 	if lifespan <= 0:
 		queue_free();
 
+
 func _on_body_entered(body : Node2D):
-	pass;
+	if body == player:
+		get_tree().reload_current_scene()
+	else:
+		queue_free()

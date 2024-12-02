@@ -222,7 +222,8 @@ tile_map_data = PackedByteArray("AAABAP7/AAACAAcAAAACAP7/AAACAAcAAAACAP3/AAACAAE
 tile_set = SubResource("TileSet_awybj")
 
 [node name="Player" type="CharacterBody2D" parent="."]
-collision_layer = 0
+collision_layer = 128
+collision_mask = 3
 safe_margin = 0.5
 script = ExtResource("1_n3l4d")
 
