@@ -17,9 +17,7 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if (Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_accept")) and is_on_floor():
-		if (cur_bird.position.length() < 200):	
-			velocity.y = JUMP_VELOCITY - 240
-		else:
+
 			velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.

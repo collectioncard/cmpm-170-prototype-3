@@ -34,10 +34,8 @@ func normal_flying():
 	# read mouse current location
 	anims.play("fly");
 	var mouse_position = get_global_mouse_position()
-	print_debug(mouse_position);
 
 	var player_position = get_parent().global_position + Vector2.UP * 50;
-	print_debug(player_position);
 
 	var target_position : Vector2  # where the bird is flying toward
 
@@ -78,6 +76,7 @@ func _physics_process(_delta: float) -> void:
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT and attacking_cooldown_time < 0:
+			print_debug("falsehi");
 			attacking_cooldown_time = ATTACKING_COOLDOWN + ATTACKING_DURATION
 			attacking = true
 			attack_dir = sign(get_global_mouse_position().x - global_position.x)
