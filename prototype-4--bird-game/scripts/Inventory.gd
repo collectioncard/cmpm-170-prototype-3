@@ -1,49 +1,34 @@
-extends Node
+class_name BirdSet extends Node
 
 var CurrentToolIndex = 0;
-var Inventory = [];
+@export var Inventory = [];
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	Inventory = [
-		Item.new("Example Item 1", false),
-		Item.new("Example Item 2", false),
-		Item.new("Example Item 3", false),
-		Item.new("Example Item 4", true),
-		Item.new("Example Item 5", false),
-	]
 
-
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _input(event: InputEvent) -> void:
+	var new_tool_index = -1;
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			while true:
-				CurrentToolIndex = (CurrentToolIndex + 1) % Inventory.size()
-				if not Inventory[CurrentToolIndex].isDisabled:
-					break
+			new_tool_index = (CurrentToolIndex + 1) % Inventory.size();
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			while true:
-				CurrentToolIndex = (CurrentToolIndex - 1 + Inventory.size()) % Inventory.size()
-				if not Inventory[CurrentToolIndex].isDisabled:
-					break
-		print(Inventory[CurrentToolIndex].itemName)
+			new_tool_index = (CurrentToolIndex - 1 + Inventory.size()) % Inventory.size();
+					
+		if new_tool_index != -1:
+			get_node(Inventory[CurrentToolIndex]).visible = false;
+			get_node(Inventory[new_tool_index]).visible = true;
+			CurrentToolIndex = new_tool_index;
+			print_debug("Current Tool: " + str(Inventory[new_tool_index]));
 		
-func getCurrentItem() -> Item:
-	return Inventory[CurrentToolIndex];
+		
 
 
 	
 class Item:
-	var itemName: String;
+	var birdScene: CharacterBody2D;
 	var isDisabled: bool;
 	
 	func _init(newItemName, isItemDisabled):
-		self.itemName = newItemName;
+		self.birdScene = newItemName;
 		self.isDisabled = isItemDisabled;
 		
 	pass; 

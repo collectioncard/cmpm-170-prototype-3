@@ -4,7 +4,7 @@ extends CharacterBody2D
 const SPEED = 1400.0
 const JUMP_VELOCITY = -1400.0
 
-@onready var cur_bird : CharacterBody2D = get_node("bird");
+@onready var cur_bird : CharacterBody2D = get_node("attackBird");
 
 func _process(_delta: float) -> void:
 	if position.y > 1500:
