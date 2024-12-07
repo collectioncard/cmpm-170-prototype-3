@@ -4,12 +4,12 @@ extends CharacterBody2D
 const SPEED = 700.0
 const JUMP_VELOCITY = -700.0
 
-@onready var cur_bird : CharacterBody2D = get_node("bird");
+@onready var cur_bird : CharacterBody2D = get_node("attackBird");
 
 func _process(_delta: float) -> void:
 	if position.y > 1500:
 		position = Vector2.ZERO
-
+		
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():

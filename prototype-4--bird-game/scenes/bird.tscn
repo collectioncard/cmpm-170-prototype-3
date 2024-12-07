@@ -56,8 +56,9 @@ shape = SubResource("CircleShape2D_xxbex")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gjskf")
-animation = &"attacking"
+animation = &"fly"
 autoplay = "fly"
+frame_progress = 0.785328
 
 [connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
