@@ -9,7 +9,7 @@ var lifespan: float = 5;
 
 
 func _process(_delta) -> void:
-	self.position += speed * dir;
+	self.position += speed * dir * _delta * 60;
 	#print_debug("Speed:" +str(speed) + " Dir:" + str(dir))
 	lifespan -= _delta;
 	if lifespan <= 0:
