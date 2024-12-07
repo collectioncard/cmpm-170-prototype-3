@@ -5,10 +5,10 @@ const JUMP_VELOCITY = -400.0
 var direction = -1;
 
 #Bullet Stuff
-var cooldown := 1.0
+var cooldown := 2.0
 var delay := 0.0
 var dir := Vector2(1,0);
-var bulletSpeed := 10;
+var bulletSpeed := 8;
 var n_rotation := 0.0;
 var bullet := preload("res://scenes/bullet.tscn");
 var timer : float = delay;
@@ -17,7 +17,7 @@ var timer : float = delay;
 func shoot() -> void:
 	var new_bullet : Area2D = bullet.instantiate()
 	var player_position = get_parent().get_node("Player").global_position
-	var direction_to_player = (player_position - position).normalized()
+	var direction_to_player = (player_position - global_position).normalized()
 
 	get_parent().add_child(new_bullet)
 	new_bullet.position = position;

@@ -11,7 +11,7 @@ gradient = SubResource("Gradient_bij7k")
 size = Vector2(200.5, 264.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_djhi1"]
-size = Vector2(212.5, 199)
+size = Vector2(230.5, 199)
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 2
@@ -25,6 +25,7 @@ texture = SubResource("GradientTexture2D_imxmn")
 shape = SubResource("RectangleShape2D_xrr01")
 
 [node name="dir_checker" type="Area2D" parent="."]
+collision_mask = 129
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="dir_checker"]
 position = Vector2(0, -26)

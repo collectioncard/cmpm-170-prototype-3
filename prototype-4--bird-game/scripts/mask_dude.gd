@@ -3,7 +3,7 @@ class_name MaskDude extends CharacterBody2D
 
 const SPEED = 300.0
 const APPROACH_DIST = 500
-const JUMP_VELOCITY = -800.0
+const JUMP_VELOCITY = -1400.0
 
 @export var wander_radius = 100  # how far to wander
 

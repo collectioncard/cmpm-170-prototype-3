@@ -1,14 +1,14 @@
 extends CharacterBody2D
 
 
-const SPEED = 700.0
-const JUMP_VELOCITY = -700.0
+const SPEED = 1400.0
+const JUMP_VELOCITY = -1400.0
 
 @onready var cur_bird : CharacterBody2D = get_node("bird");
 
 func _process(_delta: float) -> void:
 	if position.y > 1500:
-		position = Vector2.ZERO
+		position = Vector2(-2535, 130);
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -17,8 +17,8 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if (Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_accept")) and is_on_floor():
-		if (position.distance_to(cur_bird.global_position) < 75):	
-			velocity.y = JUMP_VELOCITY - 100
+		if (cur_bird.position.length() < 200):	
+			velocity.y = JUMP_VELOCITY - 240
 		else:
 			velocity.y = JUMP_VELOCITY
 

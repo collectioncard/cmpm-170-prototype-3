@@ -1,13 +1,14 @@
 extends CharacterBody2D
 
 
-const SPEED = 500.0
+const SPEED = 900.0
 const ATTACK_SPEED_MUX = 3.0  # X times faster than normal flying speed
 const ATTACKING_DURATION = 150  # msec
 const ATTACKING_COOLDOWN = 500;
-const RANGE = 300  # how far the bird can be away from the player
+const RANGE = 600  # how far the bird can be away from the player
 
 @onready var anims : AnimatedSprite2D = get_node("AnimatedSprite2D");
+@onready var hitbox : Area2D = get_node("attack_area");
 
 var attacking: bool = false
 var attack_dir : int = 0;
@@ -19,15 +20,24 @@ func attack_flying():
 	anims.play("attacking");
 	var direction = Vector2(attack_dir, 1).normalized()
 	velocity = direction * SPEED * ATTACK_SPEED_MUX
+	
+	var bodies : Array[Node2D] = hitbox.get_overlapping_bodies();
+	for body in bodies:
+		if body.has_method("destroy"):
+			body.destroy()
+		if body.has_method("shoot"):
+			body.queue_free();
+	
 
 
 func normal_flying():
 	# read mouse current location
 	anims.play("fly");
 	var mouse_position = get_global_mouse_position()
+	print_debug(mouse_position);
 
-	var player_position = get_parent().position + Vector2.UP * 50;
-
+	var player_position = get_parent().global_position + Vector2.UP * 50;
+	print_debug(player_position);
 
 	var target_position : Vector2  # where the bird is flying toward
 
@@ -50,7 +60,7 @@ func _process(_delta: float) -> void:
 	rotation = abs(velocity.angle())
 	anims.flip_v = (rotation) > PI/2;
 	
-	if (global_position.distance_to(get_parent().position) > 1000):
+	if (global_position.distance_to(get_parent().global_position) > RANGE * 2):
 		position = Vector2.ZERO
 
 func _physics_process(_delta: float) -> void:
@@ -70,7 +80,7 @@ func _input(event):
 		if event.button_index == MOUSE_BUTTON_LEFT and attacking_cooldown_time < 0:
 			attacking_cooldown_time = ATTACKING_COOLDOWN + ATTACKING_DURATION
 			attacking = true
-			attack_dir = sign(get_global_mouse_position().x - global_position.x )
+			attack_dir = sign(get_global_mouse_position().x - global_position.x)
 			attacking_start_time = Time.get_ticks_msec()
 
 

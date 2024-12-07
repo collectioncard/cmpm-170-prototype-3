@@ -63,6 +63,10 @@ ui_down={
 2d_physics/layer_7="Bird"
 2d_physics/layer_8="Player"
 
+[physics]
+
+2d/default_gravity=2080.0
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
